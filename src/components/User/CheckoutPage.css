@@ -1,0 +1,173 @@
+/* ===== Page base ===== */
+.checkout-page { padding-bottom: 8px; }
+
+/* ===== Cart cards (Image Left • Title+X • Price+Stepper) ===== */
+.cart-cards { margin-top: 8px; }
+
+.cc2-card{
+  display:flex;
+  gap:14px;
+  align-items:flex-start;
+  background:#fff;
+  border-radius:14px;
+  padding:12px;
+  margin-bottom:14px;
+  box-shadow:0 8px 24px rgba(0,0,0,.08);
+}
+
+.cc2-img{
+  width:150px;
+  height:110px;
+  object-fit:cover;
+  border-radius:12px;
+  box-shadow:0 6px 14px rgba(0,0,0,.12);
+  background:#f3f4f6;
+}
+
+.cc2-body{
+  flex:1; min-width:0;
+  display:flex; flex-direction:column; gap:8px;
+}
+
+.cc2-top{
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+}
+.cc2-title{
+  margin:0; font-size:18px; font-weight:800; color:#111827;
+  overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+}
+.cc2-remove{
+  width:32px; height:32px; border:none; border-radius:50%;
+  background:#ef4444; color:#fff; font-size:20px; line-height:1;
+  display:grid; place-items:center; cursor:pointer;
+  box-shadow:0 3px 8px rgba(239,68,68,.35);
+}
+
+.cc2-bottom{
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+}
+
+.cc2-price{ font-size:14px; font-weight:700; color:#1f2937; }
+
+.cc2-stepper{
+  display:inline-flex; align-items:center; gap:12px;
+  border:1px solid #e5e7eb; border-radius:10px; padding:4px 8px; background:#fff;
+}
+.cc2-step{
+  width:28px; height:28px; border:none; background:transparent;
+  font-size:18px; color:#21808d; cursor:pointer; line-height:1;
+}
+.cc2-qty{ min-width:16px; text-align:center; font-weight:700; font-size:15px; }
+
+@media (max-width: 380px){
+  .cc2-img{ width:128px; height:96px; }
+  .cc2-title{ font-size:16px; }
+}
+
+/* ===== Instructions trigger ===== */
+.instructions-pill{
+  width:100%; text-align:left; padding:10px 12px; margin:6px 0 12px;
+  border:1px dashed #dadde2; border-radius:10px; background:#fafafa; color:#374151; font-size:14px;
+}
+
+/* ===== Dine-in / Take-away pill ===== */
+.order-type-toggle.pill{
+  display:flex; gap:8px; background:#f3f4f6; border-radius:999px; padding:6px; margin:0 0 12px;
+}
+.order-type-toggle.pill button{
+  flex:1; padding:10px 8px; border:none; border-radius:999px; background:transparent;
+  color:#6b7280; font-size:15px; font-weight:700; cursor:pointer;
+}
+.order-type-toggle.pill button.active{
+  background:#fff; color:#1f2937; box-shadow:0 3px 8px rgba(0,0,0,.08);
+}
+
+/* ===== Bill (compact like mock) ===== */
+.bill-panel{
+  background:#fff9e6; border-radius:10px; padding:12px; margin-bottom:12px;
+  box-shadow:inset 0 1px 0 rgba(0,0,0,.02);
+}
+.bill-panel .row{
+  display:flex; justify-content:space-between; align-items:center; padding:5px 0;
+  font-size:14px; color:#374151;
+}
+.bill-panel .row.dashed{ border-bottom:1px dashed #d1d5db; }
+.bill-panel .row.total{ font-size:17px; font-weight:800; color:#111827; margin-top:6px; }
+
+/* ===== Your details ===== */
+.details-card{
+  background:#fff; border-radius:10px; padding:12px; box-shadow:0 1px 0 rgba(0,0,0,.04);
+}
+.details-card h3{ margin:0 0 6px; font-size:17px; font-weight:800; }
+.details-name{ margin:0 0 6px; }
+.details-name .dn-text{ font-weight:700; color:#111827; font-size:14px; }
+.details-row{
+  display:flex; align-items:center; gap:8px; padding:8px 0; border-top:1px solid #f1f1f1;
+}
+.details-row:first-of-type{ border-top:1px dashed transparent; }
+.dot{
+  width:9px; height:9px; border-radius:999px; border:2px solid #059669; background:#10b981; flex:0 0 9px;
+}
+.details-text{
+  flex:1; color:#374151; font-size:14px; overflow:hidden; white-space:nowrap; text-overflow:ellipsis;
+}
+
+/* ===== Spacer so content never hides behind fixed swipe bar ===== */
+.swipe-spacer{
+  height: calc(96px + env(safe-area-inset-bottom));
+}
+
+/* ===== Fixed Swipe-to-Order (safe-area aware) ===== */
+.swipe-to-order.outlined{
+  position:fixed;
+  left:50%;
+  bottom:max(16px, env(safe-area-inset-bottom));
+  transform:translateX(-50%);
+  width:min(92%, 430px);
+  height:68px;
+  display:flex; align-items:center; gap:14px;
+  border-radius:34px; border:2px solid #d1d5db; background:#fff; padding:10px 14px;
+  font-weight:800; font-size:16px; color:#374151;
+  box-shadow:0 8px 18px rgba(0,0,0,.08);
+  user-select:none; cursor:grab; z-index:10;
+}
+.swipe-to-order.outlined .swipe-arrow.solid{
+  width:44px; height:44px; border-radius:50%; background:#e5e7eb;
+  display:grid; place-items:center; font-size:24px; color:#1f2937;
+}
+.swipe-to-order.outlined span{ flex:1; text-align:center; }
+
+/* ===== Centered cooking-instructions modal ===== */
+.bs-overlay{
+  position:fixed; inset:0; background:rgba(0,0,0,0.55); backdrop-filter:blur(3px);
+  display:flex; align-items:center; justify-content:center; padding-top:40px; z-index:1000;
+}
+.bs-sheet{
+  width:92%; max-width:500px; max-height:70vh; background:#eef2f1;
+  border-radius:26px; box-shadow:0 18px 45px rgba(0,0,0,0.28);
+  padding:22px 18px; display:flex; flex-direction:column; position:relative; overflow:hidden;
+  animation:modal-pop .2s ease-out;
+}
+@keyframes modal-pop{ from{ transform:translateY(10px) scale(.98); opacity:.7 } to{ transform:translateY(0) scale(1); opacity:1 } }
+.bs-close{
+  position:absolute; top:-32px; left:50%; transform:translateX(-50%);
+  width:52px; height:52px; border-radius:50%; border:none; background:#2f2f2f; color:#fff;
+  display:grid; place-items:center; font-size:28px; box-shadow:0 6px 18px rgba(0,0,0,.35); cursor:pointer; z-index:2000;
+}
+.bs-title{ margin:4px 4px 12px; font-size:20px; font-weight:800; color:#111827; }
+.bs-field{ padding:0 4px; }
+.bs-textarea{
+  width:100%; min-height:120px; resize:vertical; padding:12px 14px; border-radius:12px;
+  border:3px solid #ffffff; background:#fff; box-shadow:inset 0 0 0 1px #e5e7eb; font-size:15px; color:#111827; outline:none;
+}
+.bs-textarea:focus{ box-shadow: inset 0 0 0 1px #c7d2fe, 0 0 0 2px rgba(33,128,141,.15); }
+.bs-help{ margin:10px 2px 0; font-size:12.5px; color:#6b7280; line-height:1.35; }
+.bs-actions{ margin-top:auto; display:grid; grid-template-columns:1fr 1fr; gap:12px; padding:12px 4px 4px; }
+.bs-btn{ height:48px; border-radius:14px; border:none; font-weight:800; font-size:16px; cursor:pointer; }
+.bs-btn--ghost{ background:#eef2f1; color:#374151; box-shadow: inset 0 0 0 1px #e5e7eb; }
+.bs-btn--primary{ background:#4a4a4a; color:#fff; box-shadow:0 6px 16px rgba(0,0,0,.18); }
+
+/* Small phones */
+@media (max-width:480px){
+  .bs-sheet{ width:94%; max-width:420px; max-height:76vh; }
+}

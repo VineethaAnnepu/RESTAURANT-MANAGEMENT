@@ -1,0 +1,139 @@
+/* --- Kitchen.css — image-1 look (flat, soft, no big outer board) --- */
+
+:root{
+  --ink:#0F172A;
+
+  /* Peach (Processing) */
+  --proc-bg:#FBE2C8;         /* lighter peach fill */
+  --proc-border:#F7CFA7;
+  --proc-pill:#F7D7B7;
+  --proc-text:#7A4A00;
+
+  /* Green (Done dine-in) */
+  --done-bg:#CFF5DC;         /* lighter mint */
+  --done-border:#AEEBC6;
+  --done-pill:#BFEFD0;
+  --done-text:#066E3E;
+
+  /* Grey-blue (Done takeaway) */
+  --take-bg:#D9E3EA;
+  --take-border:#C7D0D7;
+  --take-pill:#CBD6DD;
+  --take-text:#2C3946;
+
+  --shadow:0 10px 24px rgba(2,6,23,0.06);
+}
+
+/* Page spacing */
+.kitchen-container{ padding: 24px 18px 40px; }
+.kitchen-title{ font-size: 44px; font-weight: 800; color: var(--ink); margin: 6px 0 24px; }
+
+/* Remove the giant white board look */
+.board{ background: transparent; box-shadow: none; padding: 0; border-radius: 0; }
+
+/* Grid like reference */
+.orders-grid{
+  display:grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 28px;
+}
+
+/* ===== Card base (flat, soft) ===== */
+.order-card{
+  border-radius: 20px;
+  border: 2px solid transparent;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+/* status colors (outer) */
+.order-card.processing{ background: var(--proc-bg); border-color: var(--proc-border); }
+.order-card.done-dinein{ background: var(--done-bg); border-color: var(--done-border); }
+.order-card.done-takeaway{ background: var(--take-bg); border-color: var(--take-border); }
+
+/* ----- Header: white strip with pill on the right (exact layout) ----- */
+.head-block{
+  background:#fff;
+  border-radius: 16px;
+  margin: 18px 18px 10px;
+  padding: 12px 14px;
+}
+.card-head{
+  display:grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  align-items:center;
+}
+.head-left{
+  display:grid;
+  grid-template-columns: 36px 1fr;
+  gap: 10px;
+  align-items:center;
+}
+.head-icon{
+  width:36px;height:36px;border-radius:12px;display:grid;place-items:center;
+  background:#e6f0ff;color:#0F172A;
+}
+.order-id{ font-weight:800; font-size:20px; color:var(--ink); line-height:1.1; }
+.order-meta{ font-size:12px; color:#6B7280; margin-top:2px; display:flex; gap:10px; flex-wrap:wrap; }
+
+/* STATUS pill (rounded rectangle like image-1) */
+.status-pill{
+  min-width: 168px;
+  padding: 12px 18px;
+  border-radius: 18px;
+  font-size: 14px;
+  font-weight: 800;
+  display:grid;
+  grid-auto-flow:row;
+  justify-items:center;
+  line-height:1.05;
+}
+.order-card.processing .status-pill{ background:var(--proc-pill); color:var(--proc-text); }
+.order-card.done-dinein .status-pill{ background:var(--done-pill); color:var(--done-text); }
+.order-card.done-takeaway .status-pill{ background:var(--take-pill); color:var(--take-text); }
+.small{ font-size:12px; opacity:.9; }
+
+/* ----- Items panel (white block) ----- */
+.order-card__body{
+  background:#fff;
+  border-radius: 16px;
+  margin: 0 18px 16px;
+  padding: 16px 16px 14px;
+}
+.items-block{
+  background:#ffffff;
+  border: 1px solid #ECEFF1;
+  border-radius: 14px;
+  padding: 16px;
+}
+.item-row{ display:flex; gap:12px; align-items:baseline; padding:10px 2px; }
+.item-qty{ color:#0E7C66; font-weight:800; min-width:34px; text-align:right; }
+.item-name{ color:var(--ink); font-size:15px; font-weight:600; }
+
+/* ----- Footer button (pill with tiny icon circle) ----- */
+.card-foot{ padding: 14px 18px 22px; }
+.action-btn{
+  width:100%;
+  border:none;
+  border-radius: 22px;
+  font-size:16px;
+  font-weight:800;
+  padding: 14px 16px;
+  cursor:pointer;
+  display:grid;
+  grid-auto-flow:column;
+  place-items:center;
+  gap:10px;
+}
+.order-card.processing .action-btn{ background:#F3B978; color:#4A2C00; }
+.order-card.processing .action-btn:hover{ background:#EFAF65; }
+.order-card.done-dinein .action-btn{ background:#29CF7B; color:#053B24; }
+.order-card.done-dinein .action-btn:hover{ background:#23BD70; }
+.order-card.done-takeaway .action-btn{ background:#AEB9C3; color:#1E2C39; }
+.order-card.done-takeaway .action-btn:hover{ background:#A2AFBA; }
+
+.btn-icon{
+  width:26px;height:26px;border-radius:50%;
+  background:#ffffffcc; display:grid; place-items:center; font-size:14px;
+}

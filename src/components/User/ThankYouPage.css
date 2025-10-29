@@ -1,0 +1,79 @@
+/* src/components/User/ThankYouPage.css (REPLACE ENTIRE CONTENT) */
+
+.thank-you-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  
+  /* FIX: Ensure space is distributed between elements */
+  justify-content: space-between; 
+  
+  width: 100%;
+  max-width: 430px;
+  
+  /* Use fixed auto margin for horizontal centering */
+  margin: 0 auto; 
+  
+  background-color: #10B981; 
+  color: #fff;
+  box-sizing: border-box;
+  /* CRUCIAL: Must be 100vh for justify-content: space-between to work */
+  min-height: 100vh; 
+  
+  /* Add padding to prevent content from touching top/bottom edges */
+  padding: 50px 20px 30px; 
+}
+
+/* Container to hold ALL content and center it vertically */
+.thank-you-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    /* FIX: Auto margin pushes this content down, but justify-content in parent handles vertical spacing */
+    margin: auto; 
+}
+
+/* Group container for the Title and Icon */
+.thank-you-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.check-circle {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Space between title (H2) and icon */
+  margin-top: 24px; 
+  margin-bottom: 0; 
+}
+
+.check-circle svg {
+  width: 80px;
+  height: 80px;
+  color: #10B981;
+  stroke-width: 2.5;
+}
+
+.thank-you-container h2 {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0; 
+}
+
+/* Redirect message is positioned at the bottom */
+.redirect-message {
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff; 
+  margin: 0;
+  /* FIX: Ensure it is always centered horizontally at the bottom */
+  width: 100%;
+  text-align: center;
+}

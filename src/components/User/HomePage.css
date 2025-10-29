@@ -1,0 +1,138 @@
+/* src/components/User/HomePage.css */
+
+.homepage {
+  padding-bottom: 24px; /* small bottom space since Next is not fixed */
+}
+
+/* ---------- Header + Search ---------- */
+.home-header { margin-bottom: 16px; }
+.home-header h1 { font-size: 24px; font-weight: 700; margin: 0; }
+.home-header p { font-size: 16px; color: #6b7280; margin: 4px 0 0; }
+
+.search-bar { position: relative; margin-bottom: 20px; }
+.search-icon {
+  position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+  width: 20px; height: 20px; color: #9ca3af;
+}
+.search-bar input {
+  width: 100%; padding: 14px 14px 14px 44px;
+  border-radius: 28px; border: 1px solid #e5e7eb;
+  background-color: #f3f4f6; font-size: 16px;
+}
+.search-bar input:focus { outline: none; border-color: #21808d; background-color: #fff; }
+
+/* ---------- Category Nav (icons) ---------- */
+.category-nav {
+  display: flex; overflow-x: auto; gap: 14px;
+  padding: 0 8px 10px; margin-bottom: 16px;
+  -ms-overflow-style: none; scrollbar-width: none;
+}
+.category-nav::-webkit-scrollbar { display: none; }
+
+/* * FIX: All old .category-btn, .category-icon, 
+ * and .category-label rules have been DELETED from this file. 
+ * The correct styles are in CategoryButton.css 
+ */
+
+/* ---------- Menu grid/cards ---------- */
+.menu-list { padding-bottom: 0; }
+.category-section-wrapper { margin-bottom: 20px; }
+.category-section-wrapper h2 { font-size: 20px; font-weight: 700; margin: 10px 0; }
+
+.category-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+
+.menu-item {
+  background-color: #fff; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  overflow: hidden; display: flex; flex-direction: column;
+}
+.item-image { width: 100%; height: 140px; object-fit: cover; background: #eee; }
+
+.item-details {
+  background-color: #f0f0f0; padding: 12px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.item-info-wrapper { overflow: hidden; margin-right: 8px; }
+
+/* ========================================================
+   THIS IS THE FIX FOR THE "Chick..." TEXT BUG
+======================================================== */
+.item-details h3 {
+  font-size: 16px; 
+  font-weight: 600; 
+  margin: 0; 
+  color: #1f2937;
+  line-height: 1.3; /* Allows text to wrap neatly */
+  min-height: 2.6em; /* Reserves space for 2 lines */
+
+  /* These 3 lines were the bug. They are now REMOVED: */
+  /* white-space: nowrap; */
+  /* overflow: hidden; */
+  /* text-overflow: ellipsis; */
+}
+/* ======================================================== */
+
+.item-details p { font-size: 14px; font-weight: 600; color: #1f2937; margin-top: 4px; line-height: 1.2; }
+
+.add-btn {
+  flex-shrink: 0; width: 32px; height: 32px; border-radius: 8px; border: none;
+  background-color: #fff; font-size: 22px; color: #1f2937; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; padding: 0;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+}
+.quantity-control-card {
+  flex-shrink: 0; display: flex; align-items: center; gap: 10px;
+  background: #fff; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+}
+.quantity-control-card button {
+  width: 32px; height: 32px; border: none; background: none;
+  font-size: 22px; cursor: pointer; color: #21808d;
+}
+.quantity-control-card span { font-size: 16px; font-weight: 700; }
+
+/* ---------- Next button at END of page, right aligned ---------- */
+.next-button-container {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end; /* right aligned */
+  padding-right: 20px;       /* match page padding */
+  box-sizing: border-box;
+  margin: 30px 0 20px;       /* space from last row & bottom */
+}
+.next-button-container.right { justify-content: flex-end; }
+.next-btn {
+  padding: 14px 28px; border-radius: 28px; background-color: #4a4a4a;
+  color: #fff; border: none; font-size: 16px; font-weight: 700; cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+}
+
+/* ---------- Initial details modal (STYLES FIXED) ---------- */
+.initial-modal-overlay {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.7); display: flex; align-items: center; justify-content: center; z-index: 1000;
+}
+.initial-modal-content {
+  background: #eef2fa2b; /* <-- FIX: Was transparent */
+  border-radius: 12px; padding: 30px 25px; width: 90%; max-width: 350px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); /* <-- FIX: Softer shadow */
+}
+.initial-modal-content h3 {
+  font-size: 24px; font-weight: 700; text-align: center; margin: 0 0 25px;
+  color: #1f2937; /* <-- FIX: Added text color */
+}
+.form-group-modal { margin-bottom: 18px; }
+.form-group-modal label {
+  display: block; font-size: 14px; font-weight: 600; /* <-- FIX: Changed weight */
+  color: #000000; /* <-- FIX: Softer text color */
+  margin-bottom: 8px;
+}
+.form-group-modal input {
+  width: 100%; padding: 12px; /* <-- FIX: Added padding */
+  border: 1px solid #d1d5db;   /* <-- FIX: Added border */
+  background:#efefef8a;       /* <-- FIX: Solid white background */
+  border-radius: 8px; font-size: 16px;
+}
+.modal-order-btn {
+  width: 100%; padding: 14px; margin-top: 10px; border-radius: 8px;
+  background-color: #080808; color: #f9f9f9; border: none; font-size: 18px; font-weight: 700; cursor: pointer;
+}

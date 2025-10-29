@@ -1,0 +1,140 @@
+/* src/components/Admin/Tables.css */
+
+.tables-container {
+  padding: 10px;
+}
+
+.tables-grid-full {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 20px;
+}
+
+.table-box {
+  background: #FFFFFF;
+  border: 1px solid #E5E7EB;
+  border-radius: 12px;
+  padding: 15px;
+  text-align: center;
+  position: relative;
+  transition: all 0.3s ease;
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.table-box.available {
+  background: #FFFFFF; /* */
+  color: #1F2937;
+}
+
+.table-box.reserved {
+  background: #10B981; /* */
+  color: #FFFFFF;
+  border-color: #059669;
+}
+
+.table-box-number {
+  font-size: 36px;
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.table-box-label {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.table-box.reserved .table-box-label {
+  color: #A7F3D0;
+}
+
+.table-box-size {
+  font-size: 12px;
+  color: #6B7280;
+  font-weight: 500;
+}
+
+.table-box.reserved .table-box-size {
+  color: #FFFFFF;
+}
+
+.delete-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: rgba(255,255,255,0.6);
+  border: 1px solid rgba(0,0,0,0.05);
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+  opacity: 0.5;
+  transition: opacity 0.2s;
+}
+
+.table-box:hover .delete-btn {
+  opacity: 1;
+}
+.table-box.reserved .delete-btn {
+  background: rgba(0,0,0,0.1);
+  color: white;
+}
+
+/* Add Table Form */
+.add-table-form {
+  border: 2px dashed #D1D5DB;
+  border-radius: 12px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 120px;
+  background: #F9FAFB;
+}
+
+.add-table-icon {
+  font-size: 36px;
+  color: #9CA3AF;
+  margin-bottom: 10px;
+}
+
+.form-group-table {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.form-group-table label {
+  display: block;
+  font-size: 12px;
+  color: #6B7280;
+  margin-bottom: 4px;
+  text-align: left;
+}
+
+.form-group-table input,
+.form-group-table select {
+  width: 100%;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #D1D5DB;
+}
+
+.create-table-btn {
+  width: 100%;
+  padding: 10px;
+  background: #21808D;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.create-table-btn:hover {
+  background: #1a6b76;
+}

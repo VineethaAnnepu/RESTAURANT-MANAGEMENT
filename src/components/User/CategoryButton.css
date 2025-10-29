@@ -1,0 +1,42 @@
+/* src/components/User/CategoryButton.css */
+
+/* Styling for the category buttons */
+.category-btn {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  width: 90px;
+  height: 90px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 8px;
+  flex-shrink: 0;
+  color: #0f172a; /* Default text/icon color (dark) */
+  box-sizing: border-box; 
+}
+
+/* Active state matches the dark button in your image */
+.category-btn.active {
+  background: #0f172a57; 
+  color: #fff; /* White text/icon color */
+  border-color: #3a3b3d00;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.category-icon-wrap {
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+}
+
+.category-label {
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+}

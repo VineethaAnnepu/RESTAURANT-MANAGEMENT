@@ -1,0 +1,154 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
+
+:root{
+  --ink:#0F172A;
+  --muted:#6B7280;
+  --edge:#E5E9EC;
+  --card:#FFFFFF;
+  --shade:#F5F7F8;
+  --teal:#1A6A73;
+  --green:#3FD48F;
+}
+
+*{ font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial; }
+.ana-root{ padding: 0 6px 18px; }
+
+/* ===== top metrics cards ===== */
+.metrics-row{
+  display:grid; grid-template-columns: repeat(4, 1fr);
+  gap:14px; margin:10px 6px 14px;
+}
+.metric-card{
+  display:flex; align-items:center; gap:12px;
+  background:#fff; border:1px solid var(--edge); border-radius:12px; padding:14px 16px;
+}
+.metric-icon.bubble{
+  width:44px; height:44px; border-radius:12px; display:grid; place-items:center; background:#EAF2FF; font-weight:800;
+}
+.metric-label{ font-size:12px; color:#6b7780; font-weight:700; }
+.metric-value{ font-size:22px; font-weight:800; color:#0e1621; }
+
+/* ===== main grid ===== */
+.grid-3{
+  display:grid; grid-template-columns: 1.05fr 1fr 1.20fr;
+  gap:16px; margin:0 6px;
+}
+.panel{
+  background:#fff; border:1px solid var(--edge); border-radius:18px; padding:12px; 
+}
+.panel-head{ display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; }
+.panel-head h3{ margin:0; font-weight:800; font-size:20px; }
+.soft-select{ border:1px solid var(--edge); background:#fff; border-radius:18px; padding:6px 12px; font-weight:700; color:#4B5563; }
+
+/* ===== order summary (FINAL FIX FOR PERCENTAGE BARS) ===== */
+.kpi-3{ display:grid; grid-template-columns: repeat(3, 112px); gap:10px; margin-bottom:10px; }
+.kpi-tile{ background:#F6F8F9; border:1px solid var(--edge); border-radius:8px; padding:10px; text-align:center; }
+.kpi-val{ font-size:20px; font-weight:800; color:#121a23; }
+.kpi-lbl{ font-size:12px; font-weight:600; color:#7c8790; }
+
+.sum-row{ display:grid; grid-template-columns: 160px 1fr; gap:14px; align-items:center; }
+.donut{ width:140px; height:140px; }
+.donut-ring{ fill:none; stroke:#EEF2F4; stroke-width:6; }
+.donut-seg{ fill:none; stroke-width:4.5; }
+.seg-take{ stroke:#000000; } .seg-serv{ stroke:#AEB7BF; } .seg-dine{ stroke:#00000082; }
+.donut-hole{ fill:#fff; }
+
+.legend-col{ display:flex; flex-direction:column; gap:10px; }
+.leg-row{ display:flex; align-items:center; gap:12px; }
+/* Analytics.css (Find and MODIFY the .leg-text rule) */
+
+.leg-text{ 
+  width:165px; 
+  font-size:12px; 
+  color:#6a7280; 
+  font-weight:600; 
+}
+.leg-bar{
+  position:relative; 
+  height:8px; 
+  background:#EDF1F3; 
+  border-radius:999px; 
+  /* Crucial: Set flex-shrink to 0 to prevent the container from shrinking below its minimum content size */
+  flex: 1 0 auto; 
+  padding-right:8px; 
+  display:flex; 
+  overflow:hidden;
+  width: 50%; 
+}
+
+.leg-bar i{ 
+  height:8px; 
+  border-radius:999px; 
+  background:#0f1826; 
+  display: block; 
+  min-width: 0; 
+  /* Crucial: Override flex-basis/flex-shrink behavior to ensure width is honored */
+  flex-shrink: 0; 
+  transition: width 0.3s ease;
+}
+
+/* ===== revenue (GRAPH SHADING AND BARS) ===== */
+.rev-card{ 
+    border:1px solid var(--edge); 
+    border-radius:8px; 
+    background:#ffffff; 
+    padding:8px; 
+    /* This defines the vertical background bars */
+    background-image: linear-gradient(to right, 
+        rgba(0,0,0,0.03) 14.28%, transparent 14.28%, 
+        transparent 28.56%, rgba(0,0,0,0.03) 28.56%, 
+        rgba(0,0,0,0.03) 42.84%, transparent 42.84%, 
+        transparent 57.12%, rgba(0,0,0,0.03) 57.12%, 
+        rgba(0,0,0,0.03) 71.4%, transparent 71.4%, 
+        transparent 85.68%, rgba(0,0,0,0.03) 85.68%);
+    background-size: 100% 100%;
+}
+.rev-svg{ width:100%; height:170px; display:block; margin:0; }
+.rev-bg{ fill:transparent; }
+
+/* Styling for the shaded area below the curve */
+.rev-area { 
+    fill: #F0F2F5; 
+}
+
+/* Revenue line style for a bolder, smoother line */
+.rev-line{ 
+    fill:none; 
+    stroke:var(--ink); 
+    stroke-width:2.5; 
+    stroke-linecap:round; 
+}
+
+.rev-week{ display:grid; grid-template-columns:repeat(7,1fr); gap:8px; margin-top:6px; }
+.rev-day{ text-align:center; padding-top: 4px; }
+.rev-dot{ display:none; }
+.rev-label{ font-size:11px; color:#5f6f7a; font-weight:700; }
+
+/* ===== tables ===== */
+.legend-top{ display:flex; align-items:center; gap:16px; color:#6A7C88; font-size:12px; font-weight:700; }
+.legend-top .dot{ width:8px; height:8px; display:inline-block; border-radius:50%; margin:0 6px 0 8px; }
+.legend-top .dot-res{ background:var(--green); }
+.legend-top .dot-av{ background:#CFD6DC; border:1px solid #CFD6DC; }
+
+.tables-grid.tight{ display:grid; grid-template-columns: repeat(8, 1fr); gap:10px; }
+.table-cell{
+  background:#fff; border:1px solid var(--edge); border-radius:10px; padding:8px 6px; text-align:center; color:#0F1826;
+}
+.table-cell.is-reserved{ background:var(--green); border-color:var(--green); color:#fff; }
+.tbl-top{ font-size:11px; opacity:.85; }
+.tbl-num{ font-weight:800; font-size:17px; }
+
+/* ===== chef panel ===== */
+.chef-panel{ margin:16px 6px 0; }
+.chef-head{
+  display:grid; grid-template-columns: 1fr 120px;
+  align-items:center; padding:10px 12px; border-bottom:1px solid var(--edge);
+}
+.chef-list{ display:flex; flex-direction:column; }
+.chef-row{
+  display:grid; grid-template-columns: 1fr 120px;
+  align-items:center; padding:12px; border-bottom:1px solid var(--edge);
+}
+.chef-name{ font-weight:600; color:#0f1826; }
+.chef-count{ text-align:right; font-weight:700; }
+.chef-empty{ padding:14px; color:#6B7280; }
