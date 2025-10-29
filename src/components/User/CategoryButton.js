@@ -20,9 +20,9 @@ const ICON_STEMS = {
 function buildCandidates(stem) {
   const base = (process.env.PUBLIC_URL || "").replace(/\/+$/, "");
   return [
-    `${base}/asset/icons/${stem}.svg`, // NOTE: 'asset' (no extra s)
-    `/asset/icons/${stem}.svg`,
-    `asset/icons/${stem}.svg`,
+    `${base}/assest/icons/${stem}.svg`, // NOTE: 'asset' (no extra s)
+    `/assest/icons/${stem}.svg`,
+    `assest/icons/${stem}.svg`,
   ];
 }
 
