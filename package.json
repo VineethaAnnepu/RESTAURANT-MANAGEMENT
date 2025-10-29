@@ -2,7 +2,7 @@
   "name": "restaurant-app",
   "version": "1.0.0",
   "private": true,
-  "homepage": ".",
+  "homepage": "https://VineethaAnnepu.github.io/RESTAURANT-MANAGEMENT",
   "dependencies": {
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
@@ -11,7 +11,7 @@
     "web-vitals": "^4.2.4"
   },
   "devDependencies": {
-    "gh-pages": "^6.2.0"
+    "gh-pages": "^6.3.0"
   },
   "scripts": {
     "start": "react-scripts start",

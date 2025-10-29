@@ -1,7 +1,7 @@
 // src/App.js
 import React, { useEffect, useMemo, useState } from "react";
 import {
-  BrowserRouter as Router,
+  // BrowserRouter as Router, // <-- THIS LINE IS REMOVED
   Routes,
   Route,
   Navigate,
@@ -182,7 +182,7 @@ export default function App() {
         // Item is in cart, so this is a quantity update
         // The itemToAdd object *might* have a quantity (from stepper)
         // or it might not (from the menu '+' button).
-        const newQuantity = itemToAdd.quantity 
+        const newQuantity = itemToAdd.quantity
           ? itemToAdd.quantity // Use new quantity if provided (from stepper)
           : itemExists.quantity + 1; // Otherwise, increment (from '+' button)
 
@@ -260,11 +260,11 @@ export default function App() {
     const loadedDetails = load("userDetails", null);
     if (loadedDetails) {
       setUserDetails(loadedDetails);
-      
+
       // ========================================================
       // THIS IS THE FIX:
       // We no longer set the modal to false, so it stays open
-      // setIsModalOpen(false); 
+      // setIsModalOpen(false);
       // ========================================================
     }
   }, []);
@@ -276,7 +276,7 @@ export default function App() {
   };
 
   return (
-    <Router>
+    // <Router> <-- THIS LINE IS REMOVED
       <Routes>
         <Route
           path="/"
@@ -331,6 +331,6 @@ export default function App() {
           }
         />
       </Routes>
-    </Router>
+    // </Router> <-- THIS LINE IS REMOVED
   );
 }

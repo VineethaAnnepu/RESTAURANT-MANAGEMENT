@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App'; // Assuming your file is named App.js
-import reportWebVitals from './reportWebVitals';
+import App from './App';
+import { HashRouter } from 'react-router-dom'; // <-- 1. CHANGE THIS LINE
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <HashRouter> {/* <-- 2. CHANGE THIS LINE */}
+      <App />
+    </HashRouter> {/* <-- 3. CHANGE THIS LINE */}
   </React.StrictMode>
 );
-reportWebVitals();
