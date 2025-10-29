@@ -54,7 +54,7 @@ export default function AdminDashboard({
       <aside className={`sidebar ${sidebarOpen ? 'open' : ''}`}>
         <div className="logo-circle">
           {/* Using the provided restaurant.jpeg image */}
-          <img src="/restaurant.jpeg" alt="Restaurant Logo" className="restaurant-logo-image" />
+          <img src={process.env.PUBLIC_URL + "/restaurant.jpeg"} alt="Restaurant Logo" className="restaurant-logo-image" />
         </div>
 
         <div className="sidebar-list">

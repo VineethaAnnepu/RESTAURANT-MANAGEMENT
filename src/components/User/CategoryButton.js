@@ -1,28 +1,28 @@
+// src/components/User/CategoryButton.js
 import React, { useMemo } from "react";
 import "./CategoryButton.css";
 
-// exact labels -> file stems (match your /public/assest/icons/*.svg)
+// label -> icon file stem (put svgs under public/asset/icons/)
 const ICON_STEMS = {
-  "Appetizers": "appetizers", // Changed to springrolls to match files
-  "Soups": "soup",
-  "Salads": "saladdish",
-  "Veggies": "saladdish", // <-- FIX: Added Veggies to use the salad icon
-  "Burgers": "burger",
-  "Sandwiches": "sandwich",
-  "Wraps": "springrolls",
-  "Sides": "frenchfries",
-  "Beverages": "drinks",
-  "Desserts": "desserts",
-  "Pizza": "pizza",
+  Appetizers: "appetizers",
+  Soups: "soup",
+  Salads: "saladdish",
+  Veggies: "saladdish",
+  Burgers: "burger",
+  Sandwiches: "sandwich",
+  Wraps: "springrolls",
+  Sides: "frenchfries",
+  Beverages: "drinks",
+  Desserts: "desserts",
+  Pizza: "pizza",
 };
 
 function buildCandidates(stem) {
   const base = (process.env.PUBLIC_URL || "").replace(/\/+$/, "");
-  // FIX: Updated paths to point to your /public/assest/icons/ folder
   return [
-    `${base}/assest/icons/${stem}.svg`,
-    `/assest/icons/${stem}.svg`,
-    `assest/icons/${stem}.svg`,
+    `${base}/asset/icons/${stem}.svg`, // NOTE: 'asset' (no extra s)
+    `/asset/icons/${stem}.svg`,
+    `asset/icons/${stem}.svg`,
   ];
 }
 
@@ -30,7 +30,6 @@ export default function CategoryButton({ category, isActive, onClick }) {
   const stem = ICON_STEMS[category] || "saladdish";
   const candidates = useMemo(() => buildCandidates(stem), [stem]);
 
-  // rotate through candidates on error
   const onError = (e) => {
     const cur = e.currentTarget.getAttribute("data-idx") || "0";
     const next = Number(cur) + 1;
@@ -38,7 +37,6 @@ export default function CategoryButton({ category, isActive, onClick }) {
       e.currentTarget.src = candidates[next];
       e.currentTarget.setAttribute("data-idx", String(next));
     } else {
-      // ultimate fallback: a tiny inline salad icon
       e.currentTarget.src =
         "data:image/svg+xml;utf8," +
         encodeURIComponent(

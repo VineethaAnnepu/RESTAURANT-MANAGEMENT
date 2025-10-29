@@ -1,9 +1,70 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-// FIX: REMOVED the static import of categories from mockData
 import HeaderSearch from './HeaderSearch';
 import CategoryButton from './CategoryButton';
 import './HomePage.css';
+
+/* ---------- tiny image helper with multi-path fallback ---------- */
+const PLACEHOLDER_IMAGE =
+  "data:image/svg+xml;utf8," +
+  encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="140" height="100" viewBox="0 0 140 100"><rect width="140" height="100" fill="#f1f5f9"/><path d="M84 68H78V60H60v8h-6V50h6v8h18v-8h6zM70 30a10 10 0 110 20a10 10 0 010-20z" fill="#94a3b8"/></svg>');
+
+function makeCandidates(src) {
+  const PUB = (process.env.PUBLIC_URL || '').replace(/\/+$/, '');
+  const base = String(src || '').replace(/^\/+/, '');     // "chickentikka.jpeg" or "asset/icons/x.svg"
+  const name = base.split('/').slice(-1)[0];              // file name only
+
+  // Try: explicit path as given, public root, asset/, assest/ — with and without PUBLIC_URL
+  const list = [
+    // if caller passed an absolute beginning (e.g. "/chickentikka.jpeg")
+    `${PUB}/${base}`,
+    `/${base}`,
+    base,
+
+    // try asset folders
+    `${PUB}/asset/${name}`,
+    `/asset/${name}`,
+    `asset/${name}`,
+
+    `${PUB}/assest/${name}`,
+    `/assest/${name}`,
+    `assest/${name}`,
+  ];
+
+  // De-dup
+  return [...new Set(list)];
+}
+
+function Img({ item, className, alt }) {
+  // Prefer Base64 first
+  const base64 = item?.imageBase64 || null;
+  const [idx, setIdx] = useState(0);
+  const candidates = makeCandidates(item?.image || '');
+
+  const current = base64 || candidates[idx] || PLACEHOLDER_IMAGE;
+
+  return (
+    <img
+      src={current}
+      alt={alt || item?.name || 'image'}
+      className={className}
+      onError={() => {
+        if (base64) {
+          // if base64 failed, jump to first candidate
+          setIdx(0);
+        } else if (idx < candidates.length - 1) {
+          setIdx(idx + 1);
+        } else {
+          // last resort: placeholder
+          const el = new Image();
+          el.src = PLACEHOLDER_IMAGE;
+          setIdx(candidates.length - 1); // stop cycling
+        }
+      }}
+    />
+  );
+}
+/* --------------------------------------------------------------- */
 
 function InitialDetailsModal({ isOpen, onDetailsSubmit }) {
   const [name, setName] = useState('');
@@ -29,48 +90,26 @@ function InitialDetailsModal({ isOpen, onDetailsSubmit }) {
 
         <div className="form-group-modal">
           <label htmlFor="name">Name</label>
-          <input
-            id="name"
-            type="text"
-            placeholder="full name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-          />
+          <input id="name" type="text" placeholder="full name"
+            value={name} onChange={(e) => setName(e.target.value)} required />
         </div>
 
         <div className="form-group-modal">
           <label htmlFor="persons">Number of Person</label>
-          <input
-            id="persons"
-            type="number"
-            placeholder="2"
-            value={persons}
-            onChange={(e) => setPersons(e.target.value)}
-          />
+          <input id="persons" type="number" placeholder="2"
+            value={persons} onChange={(e) => setPersons(e.target.value)} />
         </div>
 
         <div className="form-group-modal">
           <label htmlFor="address">Address (for Takeout)</label>
-          <input
-            id="address"
-            type="text"
-            placeholder="address"
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
-          />
+          <input id="address" type="text" placeholder="address"
+            value={address} onChange={(e) => setAddress(e.target.value)} />
         </div>
 
         <div className="form-group-modal">
           <label htmlFor="contact">Contact</label>
-          <input
-            id="contact"
-            type="tel"
-            placeholder="phone"
-            value={contact}
-            onChange={(e) => setContact(e.target.value)}
-            required
-          />
+          <input id="contact" type="tel" placeholder="phone"
+            value={contact} onChange={(e) => setContact(e.target.value)} required />
         </div>
 
         <button type="submit" className="modal-order-btn">Order Now</button>
@@ -79,35 +118,21 @@ function InitialDetailsModal({ isOpen, onDetailsSubmit }) {
   );
 }
 
-// A Base64 SVG placeholder for broken or missing images
-const PLACEHOLDER_IMAGE = "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgZmlsbD0iI2YxZjVmOSI+CiAgPHJlY3Qgd2lkdGg9IjEwMCIgaGVpZ2h0PSIxMDAiLz4KICA8cGF0aCBkPSJNNjIgNjJINThWNTRINDZWNjhINDJWMzRINDZWNDZINTBWNDJINTRONTBINTZWNDZINThWNTBINjJWNTRIODJWNzBINDZaTTUwIDMwQTEwIDEwIDAgMSAwIDUwIDUwQTEwIDEwIDAgMCAwIDUwIDMwWiIgZmlsbD0iI2E1YWZhZiIvPgo8L3N2Zz4=";
-
-/* ------------------------------ HomePage ------------------------------ */
-// FIX: Receive the dynamic 'categories' list from App.js
 function HomePage({ menu = [], cart = [], addToCart, isModalOpen, onDetailsSubmit, categories = [] }) {
   const navigate = useNavigate();
-  
-  // FIX: Default to the first category from the prop, or an empty string
   const [activeCategory, setActiveCategory] = useState(categories[0] || '');
   const [searchTerm, setSearchTerm] = useState('');
 
-  // FIX: When categories update from App.js, set the active one if it's not set
   useEffect(() => {
-    if (!activeCategory && categories.length > 0) {
-      setActiveCategory(categories[0]);
-    }
+    if (!activeCategory && categories.length > 0) setActiveCategory(categories[0]);
   }, [categories, activeCategory]);
 
-  const getItemQuantity = (itemId) => {
-    const itemInCart = cart.find((i) => i.id === itemId);
-    return itemInCart ? itemInCart.quantity : 0;
-  };
+  const getItemQuantity = (id) => cart.find((i) => i.id === id)?.quantity || 0;
 
   const searchedMenu = menu.filter((item) =>
     item.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  // FIX: Use the dynamic 'categories' prop to build the menu
   const menuByCategories = categories.map((category) => ({
     categoryName: category,
     items: searchedMenu.filter((item) => item.category === category),
@@ -115,18 +140,14 @@ function HomePage({ menu = [], cart = [], addToCart, isModalOpen, onDetailsSubmi
 
   return (
     <div className="mobile-container homepage">
-      {/* Modal */}
       <InitialDetailsModal isOpen={isModalOpen} onDetailsSubmit={onDetailsSubmit} />
 
-      {/* Header + Search */}
       <HeaderSearch
         searchTerm={searchTerm}
         onSearchChange={(e) => setSearchTerm(e.target.value)}
       />
 
-      {/* Category Nav with Icons */}
       <nav className="category-nav">
-        {/* FIX: Map over the dynamic 'categories' prop */}
         {categories.map((category) => {
           const isActive = activeCategory === category;
           return (
@@ -140,10 +161,8 @@ function HomePage({ menu = [], cart = [], addToCart, isModalOpen, onDetailsSubmi
         })}
       </nav>
 
-      {/* Menu List */}
       <section className="menu-list">
         {menuByCategories.map(({ categoryName, items }) => {
-          // Only show the active category
           if (categoryName !== activeCategory) return null;
 
           return (
@@ -154,15 +173,9 @@ function HomePage({ menu = [], cart = [], addToCart, isModalOpen, onDetailsSubmi
                 <div className="category-grid">
                   {items.map((item) => {
                     const quantity = getItemQuantity(item.id);
-
                     return (
                       <div key={item.id} className="menu-item">
-                        <img
-                          src={item.image || PLACEHOLDER_IMAGE}
-                          alt={item.name}
-                          className="item-image"
-                          onError={(e) => { e.currentTarget.src = PLACEHOLDER_IMAGE; }}
-                        />
+                        <Img item={item} className="item-image" alt={item.name} />
                         <div className="item-details">
                           <div className="item-info-wrapper">
                             <h3>{item.name}</h3>
@@ -176,7 +189,6 @@ function HomePage({ menu = [], cart = [], addToCart, isModalOpen, onDetailsSubmi
                               <button onClick={() => addToCart({ ...item, quantity: quantity + 1 })}>+</button>
                             </div>
                           ) : (
-                            // FIX: Pass the full 'item' object to addToCart
                             <button className="add-btn" onClick={() => addToCart(item)}>+</button>
                           )}
                         </div>
@@ -192,14 +204,8 @@ function HomePage({ menu = [], cart = [], addToCart, isModalOpen, onDetailsSubmi
         })}
       </section>
 
-      {/* Next button at bottom-right → always goes to Checkout */}
       <div className="next-button-container right">
-        <button
-          className="next-btn"
-          onClick={() => navigate('/checkout')}
-        >
-          Next
-        </button>
+        <button className="next-btn" onClick={() => navigate('/checkout')}>Next</button>
       </div>
     </div>
   );
